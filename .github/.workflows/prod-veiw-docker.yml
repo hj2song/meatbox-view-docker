@@ -73,10 +73,6 @@ jobs:
     # Docker Build에 필요한 파일을 DEPLOY 경로로 이동
     - name: move deploy file
       run: |
-        pwd
-        ls -al
-        ls -al docker
-        ls -al view
         cp -rp ${{ secrets.VIEW_PATH }}/webapp/img ${{ secrets.DOCKER_PATH }}/deploy/img
         cp -rp ${{ secrets.VIEW_PATH }}/webapp/fonts ${{ secrets.DOCKER_PATH }}/deploy/fonts
         cp -rp ${{ secrets.VIEW_PATH }}/webapp/css ${{ secrets.DOCKER_PATH }}/deploy/css

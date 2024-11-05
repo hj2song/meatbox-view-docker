@@ -3,7 +3,7 @@
 
 # 특정 디렉토리 포함
 !img/
-!font/
+!fonts/
 !css/
 !js/
 !deploy.sh
