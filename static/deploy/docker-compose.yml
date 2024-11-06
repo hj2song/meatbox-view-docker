@@ -9,7 +9,7 @@ services:
       placement:
         constraints: [node.labels.hostname == docker-node-175]
       labels:
-        - app=meatbox-view
+        - app=meatbox-static
         - env=prod
       restart_policy:
         condition: on-failure
@@ -20,12 +20,12 @@ services:
       # - /home/DATA/share/meatbox:/home/DATA/share/meatbox:rw
       - /home/DATA/share/meatbox2:/home/DATA/share/meatbox:rw
     networks:
-      - meatbox-view
+      - meatbox-static
     security_opt:
       - no-new-privileges:true
     cap_drop:
       - ALL
 
 networks:
-  meatbox-view:
+  meatbox-static:
     driver: overlay
