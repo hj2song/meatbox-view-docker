@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
-sleep 100000
-ls -alR /home/DATA/www-deploy/meatbox-web2/src/main/
+
 set -ex  # 모든 명령어 실행 로그 출력 및 오류 발생 시 즉시 종료
 
 echo "파일 복사를 시작합니다."
@@ -16,7 +15,5 @@ for dir in $DIRS; do
 done
 
 echo "파일 복사가 완료되었습니다."
-
-sleep 100000
 
 exit 0
