@@ -98,8 +98,8 @@ jobs:
     - name: Build and Push
       uses: docker/build-push-action@v6
       with:
-        context: ${{ secrets.DOCKER_PATH }}/deploy
-        file: ${{ secrets.DOCKER_PATH }}/deploy/Dockerfile-${{ secrets.STATIC }}  # 사용할 Dockerfile
+        context: ${{ secrets.STATIC_DOCKER_PATH }}/deploy
+        file: ${{ secrets.STATIC_DOCKER_PATH }}/deploy/Dockerfile-${{ secrets.STATIC }}  # 사용할 Dockerfile
         push: true
         tags: |
           ${{ secrets.NEXUS_REGISTRY }}/prod/meatbox/${{ secrets.STATIC }}:${{ env.IMAGE_TAG }}
