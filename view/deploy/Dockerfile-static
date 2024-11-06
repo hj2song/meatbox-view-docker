@@ -13,4 +13,4 @@ COPY --chown=www:www . .
 
 USER www
 
-CMD ["./deploy.sh"]
+CMD ["./deploy-view.sh"]
