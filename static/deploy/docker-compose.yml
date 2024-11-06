@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   meatbox:
-    image: nexus.meatbox.co.kr/prod/meatbox/view:latest
+    image: nexus.meatbox.co.kr/prod/meatbox/static:latest
     deploy:
       mode: replicated
       replicas: 1

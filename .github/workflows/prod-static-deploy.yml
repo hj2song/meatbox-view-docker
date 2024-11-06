@@ -73,10 +73,10 @@ jobs:
     # Docker Build에 필요한 파일을 DEPLOY 경로로 이동
     - name: move deploy file
       run: |
-        cp -rp ${{ secrets.STATIC_PATH }}/webapp/img ${{ secrets.DOCKER_PATH }}/deploy/img
-        cp -rp ${{ secrets.STATIC_PATH }}/webapp/fonts ${{ secrets.DOCKER_PATH }}/deploy/fonts
-        cp -rp ${{ secrets.STATIC_PATH }}/webapp/css ${{ secrets.DOCKER_PATH }}/deploy/css
-        cp -rp ${{ secrets.STATIC_PATH }}/webapp/js ${{ secrets.DOCKER_PATH }}/deploy/js
+        cp -rp ${{ secrets.STATIC_PATH }}/webapp/img ${{ secrets.STATIC_DOCKER_PATH }}/deploy/img
+        cp -rp ${{ secrets.STATIC_PATH }}/webapp/fonts ${{ secrets.STATIC_DOCKER_PATH }}/deploy/fonts
+        cp -rp ${{ secrets.STATIC_PATH }}/webapp/css ${{ secrets.STATIC_DOCKER_PATH }}/deploy/css
+        cp -rp ${{ secrets.STATIC_PATH }}/webapp/js ${{ secrets.STATIC_DOCKER_PATH }}/deploy/js
 
     # # Minify 수행
     # - name: ant build
@@ -133,7 +133,7 @@ jobs:
 # NEXUS_PASSWORD=
 # NEXUS_REGISTRY=nexus.meatbox.co.kr:5001
 # STATIC=static
-# DOCKER_PATH=docker/view
+# STATIC_DOCKER_PATH=docker/static
 # STATIC_PATH=static/src/main
 # SLACK_WEBHOOK_URL=https://hooks.slack.com/services/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
 # ACCESS_TOKEN=
