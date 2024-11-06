@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  meatbox:
+    image: nexus.meatbox.co.kr/prod/meatbox/view:latest
+    entrypoint: /bin/sh -c
+    command: |
+      "
+      #!/usr/bin/env sh
+
+      set -e  # 스크립트에서 오류 발생 시 즉시 종료
+
+      # 소스 및 목적지 디렉토리 정의
+      IMG_SRC=/home/DATA/www-deploy/meatbox-web2/src/main/webapp/img/
+      IMG_DEST=/home/DATA/share/meatbox2/static/img/
+
+      FONTS_SRC=/home/DATA/www-deploy/meatbox-web2/src/main/webapp/fonts/
+      FONTS_DEST=/home/DATA/share/meatbox2/static/fonts/
+
+      CSS_SRC=/home/DATA/www-deploy/meatbox-web2/src/main/webapp/css/
+      CSS_DEST=/home/DATA/share/meatbox2/static/css/
+
+      JS_SRC=/home/DATA/www-deploy/meatbox-web2/src/main/webapp/js/
+      JS_DEST=/home/DATA/share/meatbox2/static/js/
+
+      # 파일 복사
+      cp -rp "$IMG_SRC"* "$IMG_DEST"
+      cp -rp "$FONTS_SRC"* "$FONTS_DEST"
+      cp -rp "$CSS_SRC"* "$CSS_DEST"
+      cp -rp "$JS_SRC"* "$JS_DEST"
+
+      echo "파일 복사가 완료되었습니다."
+
+      exit 0
+      "
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == worker]
+      labels:
+        - app=meatbox-view
+        - env=prod
+      restart_policy:
+        condition: none
+    # volumes:
+    #   - type: bind
+    #     source: /home/DATA/share/meatbox
+    #     target: /home/DATA/share/meatbox
+    #     read_only: false
+    networks:
+      - meatbox-view
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+networks:
+  meatbox-view:
+    driver: overlay
