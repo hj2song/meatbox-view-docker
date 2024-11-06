@@ -1,4 +1,4 @@
-name: Deploy Docker Image(PROD/JSP)
+name: Deploy Docker Image(PROD/VIEW)
 
 on:
   workflow_dispatch:

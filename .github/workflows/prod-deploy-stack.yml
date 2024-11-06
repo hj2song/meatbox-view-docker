@@ -1,9 +1,9 @@
-name: Deploy Stack(PROD/VIEW)
+name: Deploy Stack(PROD/STATIC)
 
 on:
   push:
     paths:
-      - 'view/deploy/docker-compose.yml'
+      - 'static/deploy/docker-compose.yml'
 
 jobs:
   build:
@@ -13,14 +13,14 @@ jobs:
     # - name: Send Slack Notification (Start)
     #   run: |
     #     curl -X POST -H 'Content-type: application/json' \
-    #     --data '{"channel": "#deploy", "username": "Meatbox Deploy Bot", "icon_emoji": ":meatbox:", "text": "🛠️ *Update Stack Started* for meatbox-${{ secrets.APP }}"}' \
+    #     --data '{"channel": "#deploy", "username": "Meatbox Deploy Bot", "icon_emoji": ":meatbox:", "text": "🛠️ *Update Stack Started* for meatbox-${{ secrets.STATIC }}"}' \
     #     ${{ secrets.SLACK_WEBHOOK_URL }}
    
    # Stack Deployment
     - name: Deploy Stack
       run: |
         echo | openssl s_client -showcerts -servername portainer.meatbox.co.kr -connect portainer.meatbox.co.kr:443 2>/dev/null | openssl x509 -outform PEM > portainer-cert.pem
-        response=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://portainer.meatbox.co.kr/api/stacks/webhooks/8411f592-9c80-4992-9ab7-55277bf8b813 --cacert portainer-cert.pem)
+        response=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://portainer.meatbox.co.kr/api/stacks/webhooks/31f8db1a-b1eb-4357-ab14-b7f55e682e48 --cacert portainer-cert.pem)
         if [ "$response" -ne 200 ] && [ "$response" -ne 204 ]; then
           echo "Stack deployment failed with response code $response"
           exit 1
@@ -31,7 +31,7 @@ jobs:
     #   if: success()  # 성공한 경우에만 실행
     #   run: |
     #     curl -X POST -H 'Content-type: application/json' \
-    #     --data '{"channel": "#deploy", "username": "Meatbox Deploy Bot", "icon_emoji": ":meatbox:", "text": "✅ *Update Stack Completed* for meatbox-${{ secrets.APP }}"}' \
+    #     --data '{"channel": "#deploy", "username": "Meatbox Deploy Bot", "icon_emoji": ":meatbox:", "text": "✅ *Update Stack Completed* for meatbox-${{ secrets.STATIC }}"}' \
     #     ${{ secrets.SLACK_WEBHOOK_URL }}
 
     # # Slack 배포 실패 알림
@@ -39,6 +39,6 @@ jobs:
     #   if: failure()  # 실패한 경우에만 실행
     #   run: |
     #     curl -X POST -H 'Content-type: application/json' \
-    #     --data '{"channel": "#deploy", "username": "Meatbox Deploy Bot", "icon_emoji": ":meatbox:", "text": "❌ *Update Stack Failed* for meatbox-${{ secrets.APP }}"}' \
+    #     --data '{"channel": "#deploy", "username": "Meatbox Deploy Bot", "icon_emoji": ":meatbox:", "text": "❌ *Update Stack Failed* for meatbox-${{ secrets.STATIC }}"}' \
     #     ${{ secrets.SLACK_WEBHOOK_URL }}
 
