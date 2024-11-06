@@ -103,7 +103,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         context: ${{ secrets.DOCKER_PATH }}/deploy
-        file: ${{ secrets.APP }}/Dockerfile-${{ secrets.APP }}  # 사용할 Dockerfile
+        file: ${{ secrets.DOCKER_PATH }}/deploy/Dockerfile-${{ secrets.APP }}  # 사용할 Dockerfile
         push: true
         tags: |
           ${{ secrets.NEXUS_REGISTRY }}/prod/meatbox/${{ secrets.APP }}:${{ env.IMAGE_TAG }}
