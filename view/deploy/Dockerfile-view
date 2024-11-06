@@ -1,14 +1,8 @@
 FROM alpine:3.20.3
 
 RUN mkdir -p    /home/DATA/www-deploy/meatbox-web2/src/main/webaap/ \ 
-                # 실제 운영 적용시 주석 해제
-                #/home/DATA/share/meatbox && \
+                /home/DATA/share/meatbox && \
 
-                # 테스트 용 디렉토리 생성, 실제 운영 적용시 주석 처리 필요
-                /home/DATA/share/meatbox/static/img \
-                /home/DATA/share/meatbox/static/view \
-                /home/DATA/share/meatbox/static/fonts \
-                /home/DATA/share/meatbox/static/js && \
     adduser -D -u 1001 -g 1001 www && \
     chown www:www -R /home
     
