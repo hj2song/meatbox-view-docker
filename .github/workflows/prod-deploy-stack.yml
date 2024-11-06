@@ -1,30 +1,30 @@
-name: Deploy Stack(PROD/VIEW)
+# name: Deploy Stack(PROD/VIEW)
 
-on:
-  push:
-    paths:
-      - 'view/deploy/docker-compose.yml'
+# on:
+#   push:
+#     paths:
+#       - 'view/deploy/docker-compose.yml'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    # # Slack 배포 시작 알림
-    # - name: Send Slack Notification (Start)
-    #   run: |
-    #     curl -X POST -H 'Content-type: application/json' \
-    #     --data '{"channel": "#deploy", "username": "Meatbox Deploy Bot", "icon_emoji": ":meatbox:", "text": "🛠️ *Update Stack Started* for meatbox-${{ secrets.APP }}"}' \
-    #     ${{ secrets.SLACK_WEBHOOK_URL }}
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     # # Slack 배포 시작 알림
+#     # - name: Send Slack Notification (Start)
+#     #   run: |
+#     #     curl -X POST -H 'Content-type: application/json' \
+#     #     --data '{"channel": "#deploy", "username": "Meatbox Deploy Bot", "icon_emoji": ":meatbox:", "text": "🛠️ *Update Stack Started* for meatbox-${{ secrets.APP }}"}' \
+#     #     ${{ secrets.SLACK_WEBHOOK_URL }}
    
-   # Stack Deployment
-    - name: Deploy Stack
-      run: |
-        echo | openssl s_client -showcerts -servername portainer.meatbox.co.kr -connect portainer.meatbox.co.kr:443 2>/dev/null | openssl x509 -outform PEM > portainer-cert.pem
-        response=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://portainer.meatbox.co.kr/api/stacks/webhooks/8411f592-9c80-4992-9ab7-55277bf8b813 --cacert portainer-cert.pem)
-        if [ "$response" -ne 200 ] && [ "$response" -ne 204 ]; then
-          echo "Stack deployment failed with response code $response"
-          exit 1
-        fi
+#    # Stack Deployment
+#     - name: Deploy Stack
+#       run: |
+#         echo | openssl s_client -showcerts -servername portainer.meatbox.co.kr -connect portainer.meatbox.co.kr:443 2>/dev/null | openssl x509 -outform PEM > portainer-cert.pem
+#         response=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://portainer.meatbox.co.kr/api/stacks/webhooks/8411f592-9c80-4992-9ab7-55277bf8b813 --cacert portainer-cert.pem)
+#         if [ "$response" -ne 200 ] && [ "$response" -ne 204 ]; then
+#           echo "Stack deployment failed with response code $response"
+#           exit 1
+#         fi
 
     # # Slack 배포 완료 알림
     # - name: Send Slack Notification (Completed)
