@@ -131,7 +131,7 @@ jobs:
 # NEXUS_USERNAME=
 # NEXUS_PASSWORD=
 # NEXUS_REGISTRY=nexus.meatbox.co.kr:5001
-# APP=view
+# VIEW=view
 # DOCKER_PATH=docker/view
 # VIEW_PATH=view/src/main
 # SLACK_WEBHOOK_URL=https://hooks.slack.com/services/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
