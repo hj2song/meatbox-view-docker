@@ -2,8 +2,9 @@ FROM alpine:3.20.3
 
 RUN mkdir -p /home/DATA/www-deploy/meatbox-web2/src/main/webaap/ \ 
             /home/DATA/share/meatbox2/static && \
-    chown www:www -R /home && \
-    adduser -D -u 1001 -g 1001 www
+            adduser -D -u 1001 -g 1001 www && \
+            chown www:www -R /home
+    
     
 WORKDIR /home/DATA/www-deploy/meatbox-web2/src/main/webaap/
 
