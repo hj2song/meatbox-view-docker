@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  meatbox:
+    image: nexus.meatbox.co.kr/prod/meatbox/view:latest
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.hostname == docker-node-175]
+      labels:
+        - app=meatbox-view
+        - env=prod
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+        delay: 5s
+    volumes:
+      # 운영 실제 적용시 사용
+      # - /home/DATA/share/meatbox:/home/DATA/share/meatbox:rw
+      - /home/DATA/share/meatbox2:/home/DATA/share/meatbox:rw
+    networks:
+      - meatbox-view
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+networks:
+  meatbox-view:
+    driver: overlay
