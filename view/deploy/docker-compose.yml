@@ -12,7 +12,9 @@ services:
         - app=meatbox-view
         - env=prod
       restart_policy:
-        condition: none
+        condition: on-failure
+        max_attempts: 5
+        delay: 5s
     volumes:
       # 운영 실제 적용시 사용
       # - /home/DATA/share/meatbox:/home/DATA/share/meatbox:rw
